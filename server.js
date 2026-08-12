@@ -106,3 +106,4 @@ const StartServer = async () => {
         process.exit(1);
     }
 };
+export default StartServer()
