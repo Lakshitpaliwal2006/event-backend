@@ -18,9 +18,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send("This is Home Page");
 })
-app.get('/test', (req, res) => {
-    res.send("Test Page");
-})
+
 app.post("/register", async (req, res) => {
     console.log("Registered API called");
     console.log(req.body);
@@ -61,6 +59,9 @@ app.get('/finance', async (req, res) => {
         });
     }
 })
+app.get('/connect',(req,res) =>{
+    return connectDB
+})
 
 function GenerateOTP() {
     const otp = Math.floor(100000 + Math.random() * 900000);
@@ -95,15 +96,31 @@ app.post('/verifyotp', async (req, res) => {
     }
 })
 const connectDB = async () => {
-    try {
-        await mongoose.connect(`${MONGODB_URL}/register`);
-        console.log("MongoDB connected successfully");
-    } catch (error) {
-        console.error("MongoDB Connection Error:", error.message);
-        throw error;
-    }
-};
+        try {
+                await mongoose.connect(`${MONGODB_URL}/register`);
+                console.log("MongoDB connected successfully");
+            } catch (error) {
+                    console.error("MongoDB Connection Error:", error.message);
+                    throw error;
+                }
+            };
+            
+            connectDB();
+            
+            export default app;
 
-connectDB();
-
-export default app;
+            // const StartServer = async () => {
+            //     try {
+            //         await mongoose.connect(`${MONGODB_URL}/register`);
+            //         console.log("Mongoose Connected Successfully");
+            
+            //         app.listen(process.env.PORT_NO, () => {
+            //             console.log(`Server is listening on port ${process.env.PORT_NO}`);
+            //         });
+            
+            //     } catch (error) {
+            //         console.log("MongoDB Connection Error:", error.message);
+            //         process.exit(1);
+            //     }
+            // };
+            // export default StartServer()
