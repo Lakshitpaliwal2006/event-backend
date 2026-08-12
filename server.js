@@ -92,18 +92,16 @@ app.post('/verifyotp', async (req, res) => {
         console.log("error on sending OTP", error)
     }
 })
-const StartServer = async () => {
+const connectDB = async () => {
     try {
         await mongoose.connect(`${MONGODB_URL}/register`);
-        console.log("Mongoose Connected Successfully");
-
-        app.listen(process.env.PORT_NO, () => {
-            console.log(`Server is listening on port ${process.env.PORT_NO}`);
-        });
-
+        console.log("MongoDB connected successfully");
     } catch (error) {
-        console.log("MongoDB Connection Error:", error.message);
-        process.exit(1);
+        console.error("MongoDB Connection Error:", error.message);
+        throw error;
     }
 };
-export default StartServer()
+
+connectDB();
+
+export default app;
