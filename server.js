@@ -18,7 +18,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send("This is Home Page");
 })
-
+app.get('/test', (req, res) => {
+    res.send("Test Page");
+})
 app.post("/register", async (req, res) => {
     console.log("Registered API called");
     console.log(req.body);
