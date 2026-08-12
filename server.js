@@ -60,9 +60,14 @@ app.get('/finance', async (req, res) => {
     }
 })
 app.get('/connect', async (req,res) =>{
-    return await connectDB()
+    const connectDatabase = await connectDB;
+    return res.json({
+        message:connectDatabase
+    })
 })
-
+app.get('/test', () => {
+    res.send("Test Route is Working")
+})
 function GenerateOTP() {
     const otp = Math.floor(100000 + Math.random() * 900000);
     return otp;
