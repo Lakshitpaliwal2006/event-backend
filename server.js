@@ -65,7 +65,7 @@ app.get('/connect', async (req,res) =>{
         message:connectDatabase
     })
 })
-app.get('/test', () => {
+app.get('/test', (req,res) => {
     res.send("Test Route is Working")
 })
 function GenerateOTP() {
