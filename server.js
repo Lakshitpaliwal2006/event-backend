@@ -59,8 +59,8 @@ app.get('/finance', async (req, res) => {
         });
     }
 })
-app.get('/connect',(req,res) =>{
-    return connectDB
+app.get('/connect', async (req,res) =>{
+    return await connectDB()
 })
 
 function GenerateOTP() {
