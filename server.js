@@ -8,7 +8,8 @@ import SendMail from "./Mail/SendMail.Mail.js";
 import { toast } from "sonner";
 const app = express();
 dotenv.config();
-const MONGODB_URL = process.env.MONGODB_URL
+const MONGODB_CLOUD_URL = process.env.MONGODB_CLOUD_URL
+// console.log(MONGODB_CLOUD_URL)
 app.use(cors({
     origin: "*",
     credentials: true
@@ -20,7 +21,7 @@ const connectDB = async () => {
             if (mongoose.connection.readyState === 1) {
             return;
         }
-                await mongoose.connect(`${MONGODB_URL}/register`);
+                await mongoose.connect(`${MONGODB_CLOUD_URL}/register`);
                 console.log("MongoDB connected successfully");
             } catch (error) {
                     console.error("MongoDB Connection Error:", error.message);
