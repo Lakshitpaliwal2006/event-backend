@@ -17,6 +17,9 @@ app.use(express.json());
 
 const connectDB = async () => {
         try {
+            if (mongoose.connection.readyState === 1) {
+            return;
+        }
                 await mongoose.connect(`${MONGODB_URL}/register`);
                 console.log("MongoDB connected successfully");
             } catch (error) {
@@ -24,7 +27,7 @@ const connectDB = async () => {
                     throw error;
                 }
             };
-connectDB();
+            connectDB();
 
 app.get('/', (req, res) => {
     res.send("This is Home Page");
@@ -57,8 +60,10 @@ app.post("/register", async (req, res) => {
         });
     }
 });
+
 app.get('/finance', async (req, res) => {
     try {
+        
         const response = await Finance.find({})
         res.json(response)
     } catch (error) {
