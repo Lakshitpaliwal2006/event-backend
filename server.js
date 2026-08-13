@@ -110,9 +110,7 @@ const connectDB = async () => {
                 }
             };
             
-            connectDB();
-            
-            export default app;
+            export default connectDB;
 
             // const StartServer = async () => {
             //     try {
