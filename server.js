@@ -27,7 +27,14 @@ const connectDB = async () => {
                     throw error;
                 }
             };
-            connectDB();
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+      console.log(`Some Error on Connected to Database`)  
+    }
+})
 
 app.get('/', (req, res) => {
     res.send("This is Home Page");
