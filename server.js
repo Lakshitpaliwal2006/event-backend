@@ -15,6 +15,17 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const connectDB = async () => {
+        try {
+                await mongoose.connect(`${MONGODB_URL}/register`);
+                console.log("MongoDB connected successfully");
+            } catch (error) {
+                    console.error("MongoDB Connection Error:", error.message);
+                    throw error;
+                }
+            };
+connectDB();
+
 app.get('/', (req, res) => {
     res.send("This is Home Page");
 })
@@ -100,17 +111,11 @@ app.post('/verifyotp', async (req, res) => {
         console.log("error on sending OTP", error)
     }
 })
-const connectDB = async () => {
-        try {
-                await mongoose.connect(`${MONGODB_URL}/register`);
-                console.log("MongoDB connected successfully");
-            } catch (error) {
-                    console.error("MongoDB Connection Error:", error.message);
-                    throw error;
-                }
-            };
+
             
-            export default connectDB;
+
+            
+            export default app;
 
             // const StartServer = async () => {
             //     try {
